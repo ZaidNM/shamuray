@@ -76,6 +76,8 @@ section>h2{font-size:22px;color:var(--gold)}
 .qty b{min-width:18px;text-align:center}
 .fls{margin-top:8px;border-top:1px dashed var(--line)}
 .fl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;font-size:14.5px}
+.del{border:0;background:none;color:var(--mute);font-size:15px;cursor:pointer;padding:0 0 0 6px}
+.del:hover,.del:focus-visible{color:#ff8a8a;outline:none}
 
 #order{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
 #order h2{font-size:24px}
@@ -249,13 +251,16 @@ function isLocal(){var r=document.querySelector('input[name=m]:checked');return 
 function desc(c){var p=P[c.i],s=p.n;if(c.o)s+=" · "+c.o;if(c.fl)s+=" ("+c.fl.map(function(fl){return (p.makis/p.pack)+" × "+fl}).join(", ")+")";return s}
 function tapOf(p){return p.t?(p.pack||1)*TAPER:0}
 function sub(c){var p=P[c.i],s=c.q*(p.p+tapOf(p));if(p.sur&&!isLocal())s+=c.q*p.sur;return s}
+function syncCounters(){
+document.querySelectorAll("b[data-k]").forEach(function(b){var c=C[b.dataset.k];b.textContent=c?c.q:0});
+P.forEach(function(p,id){var el=$("i"+id);if(el)el.classList.toggle("on",Object.keys(C).some(function(x){return C[x].i==id&&C[x].q>0}))})}
 function upd(){
 var h="",tot=0,n=0,k=0,tap=0,sur=0;
 Object.keys(C).forEach(function(key){var c=C[key];if(!c||!c.q)return;var p=P[c.i],s=sub(c);
 tot+=s;n+=c.q;k++;
 tap+=c.q*tapOf(p);
 if(p.sur&&!isLocal())sur+=c.q*p.sur;
-h+='<div class="l"><span>'+c.q+" × "+desc(c)+"</span><span>"+f(s)+"</span></div>"});
+h+='<div class="l"><span>'+c.q+" × "+desc(c)+'</span><span>'+f(s)+' <button type="button" class="del" aria-label="Quitar '+desc(c)+'" data-rm="'+key+'">✕</button></span></div>'});
 if(tap||sur)h+='<p class="note">'+(tap?"Taper incluido: "+f(tap)+". ":"")+(sur?"Taper de promos: "+f(sur)+".":"")+'</p>';
 $("lines").innerHTML=h||'<p class="note">Aún no agregaste platos. Usa los botones + de la carta.</p>';
 $("total").textContent=$("bt").textContent=f(tot);
@@ -263,6 +268,8 @@ $("cnt").textContent=n;
 return {tot:tot,k:k}}
 
 document.addEventListener("click",function(e){
+var rm=e.target.closest("button[data-rm]");
+if(rm){delete C[rm.dataset.rm];syncCounters();upd();return}
 var pb=e.target.closest("button[data-pack]");
 if(pb){openSheet(+pb.dataset.pack);return}
 var b=e.target.closest("button[data-i]");if(!b)return;
