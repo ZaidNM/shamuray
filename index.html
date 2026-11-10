@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Shamuray Fusión · Haz tu pedido</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--panel:#161212;--red:#c1202f;--gold:#d4a84b;--text:#f4ede4;--mute:#b3a79b;--line:#2c2323;color-scheme:dark;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 'Nunito Sans',system-ui,sans-serif;padding-bottom:96px}
+h1,h2,h3{font-family:'Chakra Petch',system-ui,sans-serif;margin:0}
+header{display:flex;align-items:center;gap:18px;padding:22px 18px;max-width:760px;margin:0 auto}
+.logoH{width:100px;height:100px;flex:none;border-radius:50%;background:#000;overflow:hidden}
+.logoH img{width:100%;height:100%;object-fit:cover;display:block}
+header h1{font-size:30px;line-height:1.1}
+header p{margin:4px 0 0;color:var(--mute);font-size:14px}
+
+/* inicio */
+#inicio{max-width:760px;margin:0 auto;padding:28px 18px 0}
+.icard{text-align:center;animation:up .45s ease}
+.cta{margin:24px 0 40px}
+.logoC{width:200px;height:200px;margin:0 auto;border-radius:50%;background:#000;overflow:hidden}
+.logoC img{width:100%;height:100%;object-fit:cover;display:block}
+.icard h1{font-size:36px;margin:18px 0 4px}
+.icard p{color:var(--mute);margin:0 0 24px}
+.icard button{border:0;border-radius:10px;background:var(--red);color:#fff;font:700 17px 'Chakra Petch',sans-serif;padding:15px 30px;cursor:pointer}
+.icard button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.icard small{display:block;margin-top:22px;color:var(--mute);font-size:13px;line-height:1.6}
+
+/* promos */
+.promos{max-width:760px;margin:0 auto;padding:6px 18px 0}
+.promos>h2{font-size:22px;color:var(--gold);margin-bottom:10px}
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.pcard img{width:100%;max-width:100%;height:230px;object-fit:cover;object-position:center 42%;display:block}
+.pbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pbody h3{font-size:20px}
+.pbody p{margin:0;color:var(--mute);font-size:13.5px}
+.ptag{align-self:flex-start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1a0f0f;background:var(--gold);border-radius:20px;padding:3px 10px}
+.pnote{color:var(--gold)!important;font-size:12.5px!important;font-weight:600}
+.pfoot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:8px}
+.pfoot .price{font-size:20px}
+.pbtn{border:1px solid var(--gold);background:none;color:var(--gold);font:700 14px 'Chakra Petch',sans-serif;border-radius:8px;padding:9px 14px;cursor:pointer}
+.pbtn:hover,.pbtn:focus-visible{background:var(--gold);color:#1a0f0f;outline:none}
+
+.local{max-width:760px;margin:0 auto;padding:22px 18px 0}
+.local>h2{font-size:22px;color:var(--gold);margin-bottom:10px}
+.lgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.lgrid img{width:100%;height:150px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block}
+@media(min-width:640px){.lgrid{grid-template-columns:repeat(4,minmax(0,1fr))}.lgrid img{height:170px}}
+.linfo{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:14.5px;color:var(--mute);line-height:1.6}
+.linfo b{color:var(--text)}
+.lmap{display:inline-block;margin-top:10px;color:var(--gold);font-weight:700;text-decoration:none;border:1px solid var(--gold);border-radius:8px;padding:8px 14px}
+.lmap:hover,.lmap:focus-visible{background:var(--gold);color:#1a0f0f;outline:none}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:8px;overflow-x:auto;padding:10px 18px}
+nav a{flex:none;color:var(--text);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:14px}
+nav a:hover,nav a:focus-visible{border-color:var(--gold);outline:none}
+main{max-width:760px;margin:0 auto;padding:0 18px}
+section{padding-top:26px}
+section>h2{font-size:22px;color:var(--gold)}
+.sub{color:var(--mute);font-size:14px;margin:2px 0 12px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.item.on{border-color:var(--red)}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.item h3{font-size:17px;font-weight:600}
+.item p{margin:2px 0 0;color:var(--mute);font-size:13.5px}
+.price{color:var(--gold);font-weight:700;white-space:nowrap}
+.price small{display:block;font-size:10.5px;color:var(--mute);font-weight:600}
+.qty{display:flex;align-items:center;gap:10px;flex:none}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:none;color:var(--text);font-size:20px;line-height:1;cursor:pointer}
+.qty button:focus-visible,.send:focus-visible,.chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.qty button:active{background:var(--red)}
+.qty b{min-width:18px;text-align:center}
+.fls{margin-top:8px;border-top:1px dashed var(--line)}
+.fl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;font-size:14.5px}
+
+#order{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+#order h2{font-size:24px}
+#lines .l{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.tot{display:flex;justify-content:space-between;font-size:20px;font-weight:700;margin:12px 0}
+.mode{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.mode label{border:1px solid var(--line);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;font-size:13.5px}
+.mode input{position:absolute;opacity:0}
+.mode label:has(input:checked){border-color:var(--gold);background:#241b12}
+.mode label:has(input:focus-visible){outline:2px solid var(--gold)}
+.f{display:none;margin-bottom:12px}
+.f.show{display:block}
+label.t{display:block;font-size:14px;color:var(--mute);margin-bottom:4px}
+.f input,.f textarea{width:100%;background:#0e0b0b;border:1px solid var(--line);border-radius:6px;color:var(--text);font:inherit;padding:10px}
+.f input:focus,.f textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+.note{font-size:13.5px;color:var(--mute);margin:8px 0 14px}
+.err{color:#ff8a8a;font-size:14px;min-height:20px}
+.send{width:100%;border:0;border-radius:8px;background:#1fa855;color:#fff;font:700 17px 'Chakra Petch',sans-serif;padding:14px;cursor:pointer}
+
+/* burbuja */
+.bubble{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;border:0;border-radius:999px;padding:10px 16px 10px 12px;font:700 15px 'Chakra Petch',sans-serif;box-shadow:0 6px 20px #0008;cursor:pointer}
+.bubble svg{width:24px;height:24px;flex:none}
+.bubble:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.badge{min-width:22px;height:22px;border-radius:50%;background:#fff;color:var(--red);font-size:12px;display:grid;place-items:center;padding:0 5px}
+
+/* hoja de sabores */
+.sheet{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;background:#000a}
+.sheet.on{display:flex}
+.sheetBox{width:100%;max-height:86vh;overflow:auto;background:var(--panel);border-top:2px solid var(--gold);border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));animation:up .2s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
+.sheetBox h3{font-size:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#0e0b0b;color:var(--text);border-radius:20px;padding:8px 12px;font:600 13.5px 'Nunito Sans',sans-serif;cursor:pointer}
+.chip.sel{border-color:var(--gold);background:#241b12;color:var(--gold)}
+.chip:disabled{opacity:.35;cursor:not-allowed}
+.sheetFoot{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;bottom:0;background:var(--panel);padding-top:10px}
+.sheetFoot .send{width:auto;padding:12px 18px}
+.sheetFoot .send:disabled{background:#3a3333;color:#8b8181;cursor:not-allowed}
+
+footer{max-width:760px;margin:28px auto 0;padding:0 18px;color:var(--mute);font-size:13px}
+@media(min-width:640px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pcard img{height:250px}}
+@media(max-width:420px){header h1{font-size:26px}.logoH{width:78px;height:78px}.icard h1{font-size:30px}}
+</style>
+</head>
+<body>
+<div id="inicio">
+<div class="icard">
+<div class="logoC"><img src="LOGO-1.png" alt="Shamuray Fusión"></div>
+<h1>Shamuray Fusión</h1>
+<p>Makis, alitas, pokes y más.<br>Haz tu pedido en un minuto.</p>
+</div>
+<section class="local" id="local">
+<h2>Nuestro local</h2>
+<div class="lgrid">
+<img src="ESPACIO.jpg" alt="Interior de Shamuray Fusión" loading="lazy">
+<img src="ESPACIO-2.jpg" alt="Mesas del local Shamuray Fusión" loading="lazy">
+<img src="ESPACIO-3.jpg" alt="Clientes disfrutando en Shamuray Fusión" loading="lazy">
+<img src="ESPACIO-4.jpg" alt="Mesa con sushi en Shamuray Fusión" loading="lazy">
+</div>
+<div class="linfo">
+<b>Dirección:</b> Jr. Corea del Norte 103, Amarilis, vía colectora, frente al colegio San Francisco de Asís.<br>
+<b>Horario:</b> 5:30 pm a 11:00 pm<br>
+<b>Teléfono:</b> 940 219 117<br>
+<a class="lmap" href="https://www.google.com/maps/search/?api=1&amp;query=Jr.+Corea+del+Norte+103+Amarilis+Huanuco" target="_blank" rel="noopener">Cómo llegar</a>
+</div>
+</section>
+<div class="icard cta"><button id="enter" type="button">Ver la carta y pedir</button></div>
+</div>
+<div id="carta" hidden>
+<header>
+<div class="logoH"><img src="LOGO-1.png" alt="Logo de Shamuray, un panda samurÃ¡i">
+</div>
+<div><h1>Shamuray Fusión</h1><p>Jr. Corea del Norte 103, Amarilis · vía colectora<br>Atención de 5:30 pm a 11:00 pm</p></div>
+</header>
+<div class="promos" id="promos">
+<h2>Promociones activas</h2>
+<div class="pgrid" id="pgrid"></div>
+</div>
+<nav id="nav"></nav>
+<main>
+<div id="menu"></div>
+<div id="order">
+<h2>Tu pedido</h2>
+<div id="lines"><p class="note">Aún no agregaste platos. Usa los botones + de la carta.</p></div>
+<div class="tot"><span>Total</span><span id="total">S/ 0.00</span></div>
+<div class="mode" role="radiogroup" aria-label="Modalidad">
+<label><input type="radio" name="m" value="local" checked>En el local</label>
+<label><input type="radio" name="m" value="recojo">Recojo</label>
+<label><input type="radio" name="m" value="delivery">Delivery</label>
+</div>
+<div class="f show" id="fr"><label class="t" for="nr">Tu nombre</label><input id="nr" autocomplete="name"></div>
+<div class="f" id="fd">
+<label class="t" for="nom">Nombre de quien recibe</label><input id="nom" autocomplete="name">
+<label class="t" for="cel" style="margin-top:10px">Celular de quien recibe</label><input id="cel" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" placeholder="9 dígitos">
+<label class="t" for="dir" style="margin-top:10px">Dirección de entrega</label><textarea id="dir" rows="2" placeholder="Calle, número y referencia"></textarea>
+<p class="note">El delivery tiene un costo adicional. Te lo confirmamos por WhatsApp.</p>
+</div>
+<div class="f show"><label class="t" for="com">Comentario (opcional)</label><textarea id="com" rows="2" placeholder="Ej: sin cebolla, sin ají, cubiertos extra"></textarea></div>
+<div class="err" id="err" role="alert"></div>
+<button class="send" id="send" type="button">Enviar pedido por WhatsApp</button>
+</div>
+</main>
+<footer>Pedidos al 940 219 117. Los platos incluyen taper de S/ 1.00.</footer>
+<button class="bubble" id="bubble" type="button" aria-label="Ver mi pedido">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+<span id="bt">S/ 0.00</span><span class="badge" id="cnt">0</span>
+</button>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shT">
+<div class="sheetBox">
+<h3 id="shT"></h3>
+<p class="sub" id="shS"></p>
+<div class="chips" id="shF"></div>
+<div class="sheetFoot"><span class="price" id="shP"></span><button class="send" id="shA" type="button" disabled>Agregar</button></div>
+</div>
+</div>
+</div>
+<script>
+var WA="51940219117",TAPER=1;
+var M=[
+{n:"Alitas · 6 piezas",s:"Todas con papas fritas · S/ 20.00",t:1,p:20,i:[
+["Alitas BBQ","dulce · mix de ajonjolí"],["Alitas Buffalo","dulce-picante · mix de ajonjolí"],["Alitas Acevichada","salado · cebolla china y ají limo"],["Alitas Teriyaki","agridulce · láminas de limón y ajonjolí"],["Alitas Maracuya","dulce · mix de ajonjolí"],["Alitas Spicy","salado-picante · cebolla china"],["Alitas Chimichurri","salado"],["Alitas Aguaymanto","dulce · mix de ajonjolí"],["Alitas Cheese","salado · salsa tare"],["Alitas Mango Habanero","dulce-picante · láminas de limón y ajonjolí"],["Alitas Salsa Ostión","salado · cebolla china"],["Alitas Anticuchera","salado · cebolla china"],["Alitas Monster","agridulce · mix de ajonjolí"]]},
+{n:"Pack alitas",s:"12 piezas con 3 salsas a escoger (indícalas en el WhatsApp)",t:1,i:[["Pack alitas","Doble sabor, doble placer",37]]},
+{n:"Makis · 10 piezas",s:"S/ 22.00 cada uno (incluye taper)",t:1,p:21,inc:1,i:[
+["Maki Charro","salado · langostinos crocantes, queso crema, guacamole"],["Maki Spicy","salado picante · tartar de trucha spicy"],["Maki Cheese","salado · salsa cheese flameada y tare"],["Maki Lomo","salado · lomo saltado y papa al hilo"],["Maki Ostión","salado · cebolla china y gotas de limón"],["Maki Acevichado","salado · pescado blanco, salsa acevichada"],["Maki Chimichurri","salado · queso crema flameado, chimichurri"],["Maki Teriyaki","agridulce · trucha salmonada, teriyaki flameada"],["Maki Furay","frito · trucha salmonada, queso crema y palta"],["Maki California","salado · trucha salmonada, mix de ajonjolí"],["Maki Summer","dulce · láminas de palta, salsa tare"],["Maki Huanca","salado · salsa huancaína y crocantes de papa"]]},
+{n:"Pack maki",s:"Elige los sabores: 10 makis por sabor",t:1,i:[
+["20 makis","2 sabores",35,2,20],["30 makis","3 sabores",55,3,30],["40 makis","4 sabores",75,4,40],["50 makis","5 sabores",90,5,50]]},
+{n:"Poke caliente",s:"S/ 15.00 cada uno",t:1,p:15,i:[["Poke oriental","salado · pollo en tempura, verduras salteadas, arroz oriental"],["Poke lomo saltado","salado · carne de res, papas fritas, arroz oriental"],["Poke tropical","semidulce · pollo en tempura, piña salteada"],["Poke de pollo naranja","dulce · pollo en tempura, salsa de naranja"],["Poke de chown mei","salado · fideos chinos, verduras y cerdo en salsa de ostión"]]},
+{n:"Sopa ramen",s:"S/ 19.00 cada una",t:1,p:19,i:[["Ramen de cerdo","nori, huevo naruto, frijolito chino, cebolla china"],["Ramen de pollo empanizado","picante · fideos chinos, caldo especial, huevo naruto"]]},
+{n:"Salchipapa",t:1,i:[["Salchipapa huanuqueña","",8],["Salchipapa Argentina","salchicha, chorizo, buffalo y chimichurri",15],["Salchipapa Crispy","salchicha y pollo empanizado",15]]},
+{n:"Guarniciones",s:"S/ 7.00 cada una",t:1,p:7,i:[["Porción de arroz oriental",""],["Porción de papas fritas",""]]},
+{n:"Bebidas",s:"Personales, 1.5 L, frutadas y soju",t:0,i:[
+["Coca-Cola 600 ml","personal",5],["Inka Cola 600 ml","personal",5],["Coca-Cola 1.5 L","",10],["Inka Cola 1.5 L","",10],
+["Bebida frutada","elige tu sabor",6.5,["Fresa","Sandía","Durazno","Lyché","Piña"]],
+["Soju","elige tu sabor",15,["Arándanos","Fresa"]]]}
+];
+var PROMOS=[
+{n:"Barco de Makis",d:"30 makis + 4 nigiris · elige 3 sabores",p:55,sur:4,img:"PROMOCION ACTIVA-1.jpeg",tag:"Solo para comer en el local",pack:3,makis:30},
+{n:"Promo 30 makis",d:"30 makis · elige 3 sabores · pagas 2",p:42,sur:3,img:"PROMOCION ACTIVA.jpeg",tag:"Solo en el local · 3x2",pack:3,makis:30}
+];
+var P=[],C={},$=function(i){return document.getElementById(i)},f=function(n){return "S/ "+n.toFixed(2)};
+var MAKI=M.filter(function(c){return c.n.indexOf("Makis")==0})[0].i.map(function(x){return x[0]});
+var menu=$("menu"),nav=$("nav"),pgrid=$("pgrid");
+
+PROMOS.forEach(function(x){
+x.id=P.length;
+P.push({n:x.n,p:x.p,t:0,sur:x.sur,pack:x.pack,makis:x.makis});
+var d=document.createElement("article");d.className="pcard";
+d.innerHTML='<img src="'+x.img+'" alt="'+x.n+'" loading="lazy"><div class="pbody"><span class="ptag">'+x.tag+'</span><h3>'+x.n+'</h3><p>'+x.d+'</p><p class="pnote">S/ '+x.p.toFixed(2)+' en local · + S/ '+x.sur+' para recojo o delivery</p><div class="pfoot"><span class="price">'+f(x.p)+'</span><button class="pbtn" type="button" data-pack="'+x.id+'">Elegir sabores</button></div></div>';
+pgrid.appendChild(d)});
+
+nav.insertAdjacentHTML("beforeend",'<a href="#promos">Promos</a>');
+M.forEach(function(c,ci){
+var sec=document.createElement("section");sec.id="c"+ci;
+sec.innerHTML="<h2>"+c.n+"</h2>"+(c.s?'<p class="sub">'+c.s+"</p>":"");
+c.i.forEach(function(x){
+var id=P.length,pr={n:x[0],p:x[2]||c.p,t:c.t};
+if(typeof x[3]=="number"){pr.pack=x[3];pr.makis=x[4]}
+if(Array.isArray(x[3]))pr.o=x[3];
+P.push(pr);
+var d=document.createElement("div");d.className="item";d.id="i"+id;
+var ctrl;
+if(pr.pack)ctrl='<button class="pbtn" type="button" data-pack="'+id+'">Elegir sabores</button>';
+else if(pr.o)ctrl='<span class="price">'+f(pr.p)+'</span>';
+else ctrl='<span class="qty"><span class="price">'+f(pr.p+(c.inc?TAPER:0))+(pr.t?'<small>'+(c.inc?'incluye taper':'+ S/ 1 taper')+'</small>':"")+'</span><button type="button" aria-label="Quitar uno de '+x[0]+'" data-i="'+id+'" data-d="-1">−</button><b data-k="'+id+'">0</b><button type="button" aria-label="Agregar uno de '+x[0]+'" data-i="'+id+'" data-d="1">+</button></span>';
+d.innerHTML='<div class="row"><div><h3>'+x[0]+(pr.pack?' <span class="price">'+f(pr.p)+'</span>':"")+"</h3>"+(x[1]?"<p>"+x[1]+"</p>":"")+'</div>'+ctrl+'</div>'+(pr.o?'<div class="fls">'+pr.o.map(function(o){return '<div class="fl"><span>'+o+'</span><span class="qty"><button type="button" aria-label="Quitar uno de '+o+'" data-i="'+id+'" data-f="'+o+'" data-d="-1">−</button><b data-k="'+id+'|'+o+'">0</b><button type="button" aria-label="Agregar uno de '+o+'" data-i="'+id+'" data-f="'+o+'" data-d="1">+</button></span></div>'}).join("")+'</div>':"");
+sec.appendChild(d)});
+menu.appendChild(sec);
+nav.insertAdjacentHTML("beforeend",'<a href="#c'+ci+'">'+c.n.split(" · ")[0]+"</a>")});
+
+function isLocal(){var r=document.querySelector('input[name=m]:checked');return !r||r.value=="local"}
+function desc(c){var p=P[c.i],s=p.n;if(c.o)s+=" · "+c.o;if(c.fl)s+=" ("+c.fl.map(function(fl){return (p.makis/p.pack)+" × "+fl}).join(", ")+")";return s}
+function tapOf(p){return p.t?(p.pack||1)*TAPER:0}
+function sub(c){var p=P[c.i],s=c.q*(p.p+tapOf(p));if(p.sur&&!isLocal())s+=c.q*p.sur;return s}
+function upd(){
+var h="",tot=0,n=0,k=0,tap=0,sur=0;
+Object.keys(C).forEach(function(key){var c=C[key];if(!c||!c.q)return;var p=P[c.i],s=sub(c);
+tot+=s;n+=c.q;k++;
+tap+=c.q*tapOf(p);
+if(p.sur&&!isLocal())sur+=c.q*p.sur;
+h+='<div class="l"><span>'+c.q+" × "+desc(c)+"</span><span>"+f(s)+"</span></div>"});
+if(tap||sur)h+='<p class="note">'+(tap?"Taper incluido: "+f(tap)+". ":"")+(sur?"Taper de promos: "+f(sur)+".":"")+'</p>';
+$("lines").innerHTML=h||'<p class="note">Aún no agregaste platos. Usa los botones + de la carta.</p>';
+$("total").textContent=$("bt").textContent=f(tot);
+$("cnt").textContent=n;
+return {tot:tot,k:k}}
+
+document.addEventListener("click",function(e){
+var pb=e.target.closest("button[data-pack]");
+if(pb){openSheet(+pb.dataset.pack);return}
+var b=e.target.closest("button[data-i]");if(!b)return;
+var id=+b.dataset.i,fl=b.dataset.f||"",k=fl?id+"|"+fl:""+id,c=C[k]||(C[k]={i:id,q:0,o:fl});
+c.q=Math.max(0,c.q+ +b.dataset.d);
+if(!c.q)delete C[k];
+document.querySelector('b[data-k="'+k+'"]').textContent=C[k]?C[k].q:0;
+$("i"+id).classList.toggle("on",Object.keys(C).some(function(x){return C[x].i==id&&C[x].q>0}));
+upd()});
+
+document.addEventListener("change",function(e){
+if(e.target.name=="m"){var v=e.target.value;$("fd").classList.toggle("show",v=="delivery");$("fr").classList.toggle("show",v!="delivery");upd()}});
+
+var SHEET={id:null,sel:[]};
+function renderChips(){
+var p=P[SHEET.id];
+$("shF").innerHTML=MAKI.map(function(m){
+var sel=SHEET.sel.indexOf(m)>-1,dis=!sel&&SHEET.sel.length>=p.pack;
+return '<button type="button" class="chip'+(sel?" sel":"")+'" data-fl="'+m+'"'+(dis?" disabled":"")+'>'+m+'</button>'}).join("");
+$("shA").disabled=SHEET.sel.length!=p.pack;
+$("shA").textContent="Agregar ("+SHEET.sel.length+"/"+p.pack+")"}
+function openSheet(id){
+var p=P[id];SHEET.id=id;SHEET.sel=[];
+$("shT").textContent=p.n;
+$("shS").textContent="Elige "+p.pack+" sabores · "+p.makis+" makis ("+(p.makis/p.pack)+" de cada sabor)";
+$("shP").textContent=f(p.p)+(p.sur?" · + S/ "+p.sur+" recojo/delivery":"");
+renderChips();
+$("sheet").classList.add("on");document.body.style.overflow="hidden"}
+function closeSheet(){$("sheet").classList.remove("on");document.body.style.overflow=""}
+$("shF").addEventListener("click",function(e){
+var b=e.target.closest("button[data-fl]");if(!b)return;
+var m=b.dataset.fl,i=SHEET.sel.indexOf(m);
+if(i>-1)SHEET.sel.splice(i,1);
+else if(SHEET.sel.length<P[SHEET.id].pack)SHEET.sel.push(m);
+renderChips()});
+$("shA").onclick=function(){
+var p=P[SHEET.id];if(SHEET.sel.length!=p.pack)return;
+var fl=SHEET.sel.slice(),k=SHEET.id+"|"+fl.slice().sort().join("+");
+var c=C[k]||(C[k]={i:SHEET.id,q:0,fl:fl});
+c.q++;closeSheet();upd()};
+$("sheet").addEventListener("click",function(e){if(e.target===$("sheet"))closeSheet()});
+
+$("bubble").onclick=function(){$("order").scrollIntoView({behavior:"smooth"})};
+$("enter").onclick=function(){$("inicio").hidden=true;$("carta").hidden=false;window.scrollTo(0,0)};
+
+$("send").onclick=function(){
+var r=upd(),v=document.querySelector('input[name=m]:checked').value,del=v=="delivery",er=$("err");er.textContent="";
+if(!r.k){er.textContent="Agrega al menos un plato para enviar tu pedido.";return}
+var nom=$("nom").value.trim(),cel=$("cel").value.trim(),dir=$("dir").value.trim();
+if(del){
+if(!nom){er.textContent="Escribe el nombre de quien recibe el delivery.";return}
+if(!/^9\d{8}$/.test(cel)){er.textContent="Escribe el celular de quien recibe (9 dígitos, empieza con 9).";return}
+if(dir.length<6){er.textContent="Escribe la dirección de entrega.";return}}
+var m="*ORDEN – Shamuray Fusión*\n\n";
+Object.keys(C).forEach(function(key){var c=C[key];if(!c||!c.q)return;
+m+=c.q+" "+desc(c)+" – "+f(sub(c))+"\n"});
+if(r.k>1)m+="\n*Total: "+f(r.tot)+"*\n";
+m+="\n*Modalidad:* "+(v=="local"?"Comer en el local":del?"Delivery":"Recojo en tienda")+"\n";
+if(del)m+="*Recibe:* "+nom+"\n*Celular:* "+cel+"\n*Dirección:* "+dir+"\n(Costo de delivery adicional, por confirmar)";
+else if($("nr").value.trim())m+="*Nombre:* "+$("nr").value.trim();
+var com=$("com").value.trim();if(com)m+="\n*Comentario:* "+com;
+window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank")};
+
+upd();
+</script>
+</body>
+</html>
