@@ -194,8 +194,10 @@ footer{max-width:760px;margin:28px auto 0;padding:0 18px;color:var(--mute);font-
 </div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 var WA="51940219117",TAPER=1;
+var SB_URL="https://TU-PROYECTO.supabase.co",SB_KEY="TU_ANON_KEY";
 var M=[
 {n:"Alitas · 6 piezas",s:"Todas con papas fritas · S/ 20.00",t:1,p:20,i:[
 ["Alitas BBQ","dulce · mix de ajonjolí"],["Alitas Buffalo","dulce-picante · mix de ajonjolí"],["Alitas Acevichada","salado · cebolla china y ají limo"],["Alitas Teriyaki","agridulce · láminas de limón y ajonjolí"],["Alitas Maracuya","dulce · mix de ajonjolí"],["Alitas Spicy","salado-picante · cebolla china"],["Alitas Chimichurri","salado"],["Alitas Aguaymanto","dulce · mix de ajonjolí"],["Alitas Cheese","salado · salsa tare"],["Alitas Mango Habanero","dulce-picante · láminas de limón y ajonjolí"],["Alitas Salsa Ostión","salado · cebolla china"],["Alitas Anticuchera","salado · cebolla china"],["Alitas Monster","agridulce · mix de ajonjolí"]]},
@@ -333,6 +335,8 @@ else if($("nr").value.trim())m+="*Nombre:* "+$("nr").value.trim();
 var com=$("com").value.trim();if(com)m+="\n*Comentario:* "+com;
 window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank")};
 
+if(window.supabase)window.supabase.createClient(SB_URL,SB_KEY).from("disponibilidad").select("nombre").eq("disponible",false).then(function(r){
+(r.data||[]).forEach(function(x){P.forEach(function(p,id){if(p.n==x.nombre&&$("i"+id))$("i"+id).hidden=true})})});
 upd();
 </script>
 </body>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin · Shamuray Fusión</title>
+<style>
+body{margin:0;background:#0a0a0a;color:#f4ede4;font:16px/1.5 system-ui,sans-serif;padding:18px}
+main{max-width:520px;margin:0 auto}
+h1{font-size:22px;color:#d4a84b;margin:0}
+p{color:#b3a79b;font-size:14px}
+input[type=email],input[type=password]{width:100%;box-sizing:border-box;background:#161212;border:1px solid #2c2323;border-radius:6px;color:#f4ede4;font:inherit;padding:10px;margin-bottom:10px}
+button{border:0;border-radius:8px;background:#c1202f;color:#fff;font:700 15px system-ui,sans-serif;padding:12px 16px;cursor:pointer}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.row{background:#161212;border:1px solid #2c2323;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.row label{display:flex;align-items:center;gap:10px;cursor:pointer}
+.row input{width:18px;height:18px;accent-color:#d4a84b}
+.err{color:#ff8a8a;min-height:20px;font-size:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<section id="login">
+<h1>Ingresar</h1>
+<p>Solo para el administrador.</p>
+<input id="email" type="email" autocomplete="username" placeholder="Correo">
+<input id="pass" type="password" autocomplete="current-password" placeholder="Contraseña">
+<div class="err" id="err"></div>
+<button id="entrar" type="button">Entrar</button>
+</section>
+<section id="panel" hidden>
+<div class="top"><h1>Disponibilidad</h1><button id="salir" type="button">Salir</button></div>
+<p>Desmarca lo que no tengas. Se oculta de la carta al instante.</p>
+<div class="err" id="msg"></div>
+<div id="lista"></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+var sb=supabase.createClient("https://TU-PROYECTO.supabase.co","TU_ANON_KEY");
+var $=function(i){return document.getElementById(i)};
+function mostrar(ok){$("login").hidden=ok;$("panel").hidden=!ok}
+function cargar(){
+sb.from("disponibilidad").select("nombre,disponible").order("id").then(function(r){
+if(r.error){$("msg").textContent=r.error.message;return}
+$("lista").innerHTML="";
+r.data.forEach(function(x){
+var d=document.createElement("div");d.className="row";
+var l=document.createElement("label");var c=document.createElement("input");
+c.type="checkbox";c.checked=x.disponible;
+l.append(c,x.nombre);d.appendChild(l);
+c.onchange=function(){
+sb.from("disponibilidad").update({disponible:c.checked}).eq("nombre",x.nombre).then(function(u){
+if(u.error){$("msg").textContent="No se guardó: "+u.error.message;c.checked=!c.checked}else $("msg").textContent=""})};
+$("lista").appendChild(d)})})}
+$("entrar").onclick=function(){
+sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("pass").value}).then(function(r){
+if(r.error){$("err").textContent="Correo o contraseña incorrectos";return}
+$("err").textContent="";$("pass").value="";mostrar(true);cargar()})};
+$("salir").onclick=function(){sb.auth.signOut().then(function(){mostrar(false)})};
+sb.auth.getSession().then(function(r){if(r.data.session){mostrar(true);cargar()}});
+</script>
+</body>
+</html>
